@@ -1,0 +1,15 @@
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+<div class="content ">
+  <h1>New Entry</h1>
+  <%= form_with(model: @entry) do |form| %>
+    <div class>
+      <%= form.label :name%>
+      <%= form.text_field :name %>
+    </div>
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %>
+</div>
