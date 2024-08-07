@@ -1,15 +1,21 @@
 <div class="bg"></div>
 <div class="bg bg2"></div>
 <div class="bg bg3"></div>
-<div class="content ">
+<div class="content form-group">
   <h1>New Entry</h1>
   <%= form_with(model: @entry) do |form| %>
-    <div class>
-      <%= form.label :name%>
-      <%= form.text_field :name %>
+    <div class="form-group py-5">
+      <%= form.label :Title%>
+      <%= form.text_field(:name, class:"form-control")%>
+      <br>
+      <%= form.label :link%>
+      <%= form.text_field :link, class:"form-control"%>
+      <br>
+      <%= form.label :content%>
+      <%= form.text_area :content, size: "70x5", class: "form-control" %>
     </div>
-    <div>
-      <%= form.submit %>
+    <div class="form-group">
+      <%= form.submit class:"form-control"%>
     </div>
   <% end %>
 </div>

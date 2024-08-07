@@ -1,9 +1,20 @@
 class SignupController < ApplicationController
-  def new
-    # This will render the signup form
+  
+    def new
+      @user = User.new
+    end
+    def create
+      @user = User.new(user_params)
+      if @user.save
+        session[:user_id] = @user.id
+        redirect_to root_path, notice: "Signed up successfully"
+      else
+        redirect_to sign_up_path, notice: "Sign up unsuccessful"
+      end
+    end
+    private
+    def user_params
+        params.require(:user).permit(:name, :email, :password, :password_confirmation)
+        
+    end
   end
-
-  def create
-    # Logic for creating a new user will go here
-  end
-end

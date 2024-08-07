@@ -16,7 +16,12 @@ class EntriesController < ApplicationController
     end
   end
 
+  def destroy
+    Entry.find(params[:id]).destroy
+    redirect_to all_path
+end
+
   def entry_params
-    params.require(:entry).permit(:name)
+    params.require(:entry).permit(:name, :link, :content)
   end
 end

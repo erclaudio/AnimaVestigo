@@ -7,4 +7,9 @@ class User < ApplicationRecord
   has_secure_password
   
   validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP, message: "must be a valid email address" }
+  before_save :capitalize_name
+  def capitalize_name
+    self.name = self.name.capitalize
+  end
 end
+

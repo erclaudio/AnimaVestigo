@@ -9,13 +9,13 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   get "about", to: "about#index", as: :about
-  get 'signup', to: 'signup#new', as: :access
+  get 'signup', to: 'signup#new'
   post 'signup', to: 'signup#create'
   get 'entries/all', to:'entries#index', as: :all
 
   # get 'entries', to: 'entries#entries', as: :new_entry
   
-  resources :entries, only: [:create, :new]
+  resources :entries, only: [:create, :new, :destroy]
   
 
 
