@@ -1,0 +1,34 @@
+<style>
+  .centered-entry {
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+<div class="content form-group" style="margin-top: 100px;">
+  <h1>Edit Password</h1>
+  <%= form_with model: Current.user, url: edit_password_path, data: { turbo: false } do |form| %>
+    <%if form.object.errors.any?%>
+      <div class="alert alert-danger">
+        <% form.object.errors.full_messages.each do |message|%>
+          <div><%= message%> </div>
+        <%end%>
+      </div>
+    <%end%>
+    <div class="form-group py-5">
+      <%= form.label :New%>
+      <%= form.password_field :password, class:"form-control"%>
+      <br>
+      <%= form.label :Confirm%>
+      <%= form.password_field :password_confirmation, class:"form-control"%>
+    </div>
+    <div class="form-group">
+      <%= form.submit "Update Password", class:"form-control"%>
+    </div>
+  <% end %>
+</div>
+</div>

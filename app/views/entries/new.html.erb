@@ -1,7 +1,15 @@
+<style>
+  .centered-entry {
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
 <div class="bg"></div>
 <div class="bg bg2"></div>
 <div class="bg bg3"></div>
-<div class="content form-group">
+<div class="content form-group" style="margin-top: 100px;">
   <h1>New Entry</h1>
   <%= form_with(model: @entry) do |form| %>
     <div class="form-group py-5">
@@ -18,4 +26,5 @@
       <%= form.submit class:"form-control"%>
     </div>
   <% end %>
+</div>
 </div>

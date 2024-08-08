@@ -1,4 +1,3 @@
-<%=@user %>
 <style>
   .centered-form {
     min-height: 70vh;
@@ -7,43 +6,49 @@
     align-items: center;
   }
   .buttonsignup-form {
-  background-color: rgb(101, 12, 129)
+    background-color: rgb(101, 12, 129);
   }
 </style>
+
 <div class="bg"></div>
 <div class="bg bg2"></div>
 <div class="bg bg3"></div>
 <div class="centered-form">
   <div class="container" id="container">
     <div class="form-container sign-up">
-      <div>
-        <h1>Start Your Journey below</h1>
-        <span>Register with E-mail</span>
-        <%= form_with model: @user, url: signup_path, data: { turbo: false }, method: :post do |form|%>
-          <%= form.text_field :name, placeholder: "Enter Name", value: @user.name&.capitalize %>
-          <%= form.email_field :email, placeholder: "Enter E-mail" %>
-          <%= form.password_field :password, placeholder: "Enter Password" %>
-          <%= form.password_field :password_confirmation, placeholder: "Enter Password again" %>
-          <%= form.submit "Sign Up", class:"btn"%>
-        <%end%>
-      </div>
+      <h1>Start Your Journey below</h1>
+      <span>Register with E-mail</span>
+      <%= form_with model: @user, url: signup_path, data: { turbo: false }, method: :post, html: { class: 'signup-form' } do |form| %>
+        <% if form.object.errors.any? %>
+          <div class="alert alert-danger">
+            <% form.object.errors.full_messages.each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        <% end %>
+        <%= form.text_field :name, placeholder: "Enter Name", value: @user.name&.capitalize %>
+        <%= form.email_field :email, placeholder: "Enter E-mail" %>
+        <%= form.password_field :password, placeholder: "Enter Password" %>
+        <%= form.password_field :password_confirmation, placeholder: "Enter Password again" %>
+        <%= form.submit "Sign Up", class: "btn" %>
+      <% end %>
     </div>
     <div class="form-container sign-in">
-      <form>
-        <h1>Sign In</h1>
-        <span>Login With Email & Password</span>
-        <input type="email" placeholder="Enter E-mail">
-        <input type="password" placeholder="Enter Password">
-        <a href="#">Forget Password?</a>
-        <button>Sign In</button>
-      </form>
+      <h1>Sign In</h1>
+      <span>Login With Email & Password</span>
+      <%= form_with model: @user, url: signin_path, data: { turbo: false }, method: :post, html: { class: 'signin-form' } do |form| %>
+        <%= form.email_field :email, placeholder: "Enter E-mail" %>
+        <%= form.password_field :password, placeholder: "Enter Password" %>
+        <%# <a href="#">Forget Password?</a> %>
+        <%= form.submit "Sign In", class: "btn" %>
+      <% end %>
     </div>
     <div class="toggle-container">
       <div class="toggle">
         <div class="toggle-panel toggle-left">
           <h1>Welcome To <br>
             Anima Vestigo</h1>
-          <p>Sign in With ID & Passowrd</p>
+          <p>Sign in With ID & Password</p>
           <button class="hidden" id="login">Sign In</button>
         </div>
         <div class="toggle-panel toggle-right">

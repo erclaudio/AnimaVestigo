@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_06_151842) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_07_085532) do
   create_table "entries", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -25,6 +25,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_06_151842) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.integer "level"
+    t.check_constraint "level >= 0 AND level <= 2", name: "level_range"
   end
 
 end

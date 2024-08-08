@@ -10,6 +10,7 @@ class User < ApplicationRecord
   before_save :capitalize_name
   def capitalize_name
     self.name = self.name.capitalize
+    self.level = 0
   end
 end
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html data-bs-theme="dark">
   <head>
-    <title>Anima Vestigo</title> 
+    <title>Anima Vestigo</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,12 +11,13 @@
     <%= javascript_importmap_tags %>
     <%= favicon_link_tag asset_path('favicon.png') %>
   </head>
-
   <body>
     <%= render partial: "shared/navbar"%>
-    <div class ="container-fluid">
-      <%= render partial: "shared/flash"%>
-    <%= yield %>
-    </div>
-  </body>
+  </li class="nav-item nav-link">
+</li>
+<div class ="container-fluid">
+  <%= render partial: "shared/flash"%>
+  <%= yield %>
+</div>
+</body>
 </html>
