@@ -5,7 +5,8 @@ import Chart from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
 import "chartkick/chart.js"
 
-
+require("chartkick");
+require("chart.js");
 
 
 const container = document.getElementById('container');

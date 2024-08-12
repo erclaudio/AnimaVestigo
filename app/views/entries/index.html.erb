@@ -1,12 +1,59 @@
+<style>
+  section {
+    width: 100%;
+    height: 100vh;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 140px 0;
+  }
+  
+  .container {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: .25em;
+    padding: 10vmin;
+  }
+  
+  .centered-entry {
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
+<br>
 <h1 style="text-align: center">All Entries</h1>
-<div style="text-align: center">
-  <% @entries.each do |entry| %>
-    <h2><%= entry.name %></h2>
-    <%= link_to entry.link, entry.link %>
-    <p class="form-group"><%= entry.content %>
-      <p>
-        <%= button_to "Delete", entry, method: :delete, data: { confirm: "Are you sure you want to delete this Project ?" }, class: "bt-danger", remote: true %>
-        <br>
-      <% end %>
-    </div>
+<section>
+  <div class="bg"></div>
+  <div class="bg bg2"></div>
+  <div class="bg bg3"></div>
+
+      <% @entries.each do |entry| %>
+        <div class="container-fluid">
+    <div class="container" style="text-align: center">
+        <div class="entry">
+          <p>Date & Time: <%= entry.created_at.strftime("%a, %d %b %Y") %> at <%= entry.created_at.strftime("%H:%M") %></p>
+          <h2><%= entry.name %></h2>
+          <%= link_to entry.link, entry.link %>
+          <p class="form-group"><%= entry.content %></p>
+          <p>Today I had <%= translate_mood_rating(entry.mood_rating) %> day.</p>
+          <p>I slept <%= translate_sleep_quality(entry.sleep_quality_rating) %>.</p>
+          <p>I felt <%= translate_anxiety_level(entry.anxiety_level) %> anxious and <%= translate_stress_level(entry.stress_level) %> stressed.</p>
+          <p>I had <%= translate_energy_level(entry.energy_level) %> energy today.</p>
+          <p>I was <%= translate_happiness(entry.happiness) %>.</p>
+          <p>My work hours were <%= translate_work_hours(entry.work_hours) %>.</p>
+          <p>I had <%= translate_social_interactions_time(entry.social_interactions_time) %> and <%= translate_hobbies_time(entry.hobbies_time) %> for hobbies.</p>
+          <p>I <%= translate_unexpected_changes(entry.unexpected_changes) %>.</p>
+          <p>I spent <%= translate_mindfulness_time(entry.mindfulness_time) %> on mindfulness.</p>
+          <p><%= entry.journaling_thoughts %></p>
+          <p><%= entry.positive_affirmations %></p>
+          <p><%= entry.notable_dreams %></p>
+          <p>
+            <%= button_to "Delete", entry, method: :delete, data: { confirm: "Are you sure you want to delete this entry?" }, class: "btn btn-danger" %>
+            <p>Score: <%= entry.score %></p>
+          </p>
+        </div>
+        </div><br>
   </div>
+      <% end %>
+    
+</section>
