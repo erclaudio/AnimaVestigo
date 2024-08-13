@@ -35,4 +35,24 @@ class EntriesController < ApplicationController
     prompt = generate_user_prompt(@entry)  # Generate the prompt using the helper method
     @help_message = OpenAIService.new.generate_help_message(prompt)
   end
+
+  def generate_suggestion
+    entry = Entry.find(params[:entry_id])
+    prompt = generate_user_prompt(entry)
+  
+    client = OpenAI::Client.new
+    response = client.chat(
+      parameters: {
+        model: "gpt-4", # or your preferred model
+        messages: [{ role: "user", content: prompt }],
+        max_tokens: 100
+      }
+    )
+  
+    suggestion = response.dig("choices", 0, "message", "content")
+  
+    # Now, you can redirect back to the entry show page with the suggestion
+    redirect_to entries_path, notice: "Suggestion generated: #{suggestion}"
+  end
+  
 end

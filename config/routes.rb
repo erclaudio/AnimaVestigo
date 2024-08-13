@@ -28,10 +28,12 @@ Rails.application.routes.draw do
   get 'password', to: "passwords#edit", as: :edit_password
   patch 'password', to: "passwords#update"
 
-  
+
   get 'pricing', to: 'pricing#index', as: :pricing
 
   get 'graph', to: 'graph#index', as: :graph
+
+  post 'generate_suggestion', to: 'entries#generate_suggestion'
 
   root to: "main#index"
 end

@@ -51,6 +51,18 @@ group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
 end
 
+group :development, :test do
+  gem 'rspec-rails', '~> 5.0.0'
+end
+
+group :test do
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner-active_record'
+end
+
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
