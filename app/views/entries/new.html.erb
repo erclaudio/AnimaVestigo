@@ -1,4 +1,18 @@
 <style>
+  section {
+    width: 100%;
+    height: 100vh;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 140px 0;
+  }
+  
+  .container {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: .25em;
+    padding: 10vmin;
+  }
+  
   .centered-entry {
     min-height: 70vh;
     display: flex;
@@ -6,25 +20,174 @@
     align-items: center;
   }
 </style>
-<div class="bg"></div>
-<div class="bg bg2"></div>
-<div class="bg bg3"></div>
-<div class="content form-group" style="margin-top: 100px;">
-  <h1>New Entry</h1>
-  <%= form_with(model: @entry) do |form| %>
-    <div class="form-group py-5">
-      <%= form.label :Title%>
-      <%= form.text_field(:name, class:"form-control")%>
-      <br>
-      <%= form.label :link%>
-      <%= form.text_field :link, class:"form-control"%>
-      <br>
-      <%= form.label :content%>
-      <%= form.text_area :content, size: "70x5", class: "form-control" %>
+
+<section>
+  <div class="bg"></div>
+  <div class="bg bg2"></div>
+  <div class="bg bg3"></div>
+  <div class="container-fluid">
+    <div class="container">
+      <h1>New Entry</h1> 
+      <%= form_with(model: @entry) do |form| %>
+        <div class="row">
+          <div class="col-sm-4">
+            <%= form.label :Title %>
+            <%= form.text_field :name, class: "form-control" %>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group py-5">
+              <%= form.label :'I was happy' %>
+              <%= form.check_box :happiness %>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group py-5">
+              <%= form.label :unexpected_changes %>
+              <%= form.check_box :unexpected_changes %>
+            </div>
+          </div>
+        </div>
+          
+        <%= form.label :link %>
+        <%= form.text_field :link, class: "form-control" %>
+        <br>
+        <%= form.label :content %>
+        <%= form.text_area :content, size: "70x5", class: "form-control" %>
+        <br>
+        
+        <div class="row">
+          <div class="col-sm-6">
+            <!-- Mood Rating -->
+            <%= form.label :mood_rating, "Mood Rating" %><br>
+            <div class="btn-group" role="group" aria-label="Mood Rating">
+              <% (1..10).each do |rating| %>
+                <input type="radio" class="btn-check" name="entry[mood_rating]" id="mood-rating-<%= rating %>" autocomplete="off" value="<%= rating %>">
+                <label class="btn btn-outline-danger" for="mood-rating-<%= rating %>"><%= rating %></label>
+              <% end %>
+            </div>
+            <br><br>
+          </div>
+          <div class="col-sm-6">
+            <!-- Sleep Quality Rating -->
+            <%= form.label :sleep_quality_rating, "Sleep Quality Rating" %><br>
+            <div class="btn-group" role="group" aria-label="Sleep Quality Rating">
+              <% (1..10).each do |rating| %>
+                <input type="radio" class="btn-check" name="entry[sleep_quality_rating]" id="sleep-quality-rating-<%= rating %>" autocomplete="off" value="<%= rating %>">
+                <label class="btn btn-outline-danger" for="sleep-quality-rating-<%= rating %>"><%= rating %></label>
+              <% end %>
+            </div>
+            <br><br>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4">
+            <!-- Anxiety Level -->
+            <%= form.label :anxiety_level, "Anxiety Level" %><br>
+            <div class="btn-group" role="group" aria-label="Anxiety Level">
+              <% (1..5).each do |level| %>
+                <input type="radio" class="btn-check" name="entry[anxiety_level]" id="anxiety-level-<%= level %>" autocomplete="off" value="<%= level %>">
+                <label class="btn btn-outline-danger" for="anxiety-level-<%= level %>"><%= level %></label>
+              <% end %>
+            </div>
+            <br><br>
+          </div>
+          <div class="col-sm-4">
+            <!-- Stress Level -->
+            <%= form.label :stress_level, "Stress Level" %><br>
+            <div class="btn-group" role="group" aria-label="Stress Level">
+              <% (1..5).each do |level| %>
+                <input type="radio" class="btn-check" name="entry[stress_level]" id="stress-level-<%= level %>" autocomplete="off" value="<%= level %>">
+                <label class="btn btn-outline-danger" for="stress-level-<%= level %>"><%= level %></label>
+              <% end %>
+            </div>
+            <br><br>
+          </div>
+          <div class="col-sm-4">
+            <!-- Energy Level -->
+            <%= form.label :energy_level, "Energy Level" %><br>
+            <div class="btn-group" role="group" aria-label="Energy Level">
+              <% (1..5).each do |level| %>
+                <input type="radio" class="btn-check" name="entry[energy_level]" id="energy-level-<%= level %>" autocomplete="off" value="<%= level %>">
+                <label class="btn btn-outline-danger" for="energy-level-<%= level %>"><%= level %></label>
+              <% end %>
+            </div>
+            <br><br>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <!-- Work Hours -->
+            <%= form.label :work_hours, "Work Hours" %><br>
+            <div class="btn-group" role="group" aria-label="Work Hours">
+              <% (0..12).each do |hours| %>
+                <input type="radio" class="btn-check" name="entry[work_hours]" id="work-hours-<%= hours %>" autocomplete="off" value="<%= hours %>">
+                <label class="btn <%= "btn-outline-success" if hours <= 4 %><%= "btn-outline-warning" if hours > 4 && hours <= 8 %><%= "btn-outline-danger" if hours > 8 %>" for="work-hours-<%= hours %>"><%= hours %></label>
+              <% end %>
+            </div>
+            <br><br>
+          </div>
+
+          <div class="col-sm-6">
+            <!-- Social Interactions Time -->
+            <%= form.label :social_interactions_time, "Social Interactions Time" %><br>
+            <div class="btn-group" role="group" aria-label="Social Interactions Time">
+              <% (0..12).each do |hours| %>
+                <input type="radio" class="btn-check" name="entry[social_interactions_time]" id="social-interactions-<%= hours %>" autocomplete="off" value="<%= hours %>">
+                <label class="btn <%= "btn-outline-success" if hours >= 6 %><%= "btn-outline-warning" if hours > 3 && hours < 6 %><%= "btn-outline-danger" if hours <= 3 %>" for="social-interactions-<%= hours %>"><%= hours %></label>
+              <% end %>
+            </div>
+            <br><br>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <!-- Hobbies Time -->
+            <%= form.label :hobbies_time, "Hobbies Time" %><br>
+            <div class="btn-group" role="group" aria-label="Hobbies Time">
+              <% (0..12).each do |hours| %>
+                <input type="radio" class="btn-check" name="entry[hobbies_time]" id="hobbies-time-<%= hours %>" autocomplete="off" value="<%= hours %>">
+                <label class="btn <%= "btn-outline-success" if hours >= 6 %><%= "btn-outline-warning" if hours > 3 && hours < 6 %><%= "btn-outline-danger" if hours <= 3 %>" for="hobbies-time-<%= hours %>"><%= hours %></label>
+              <% end %>
+            </div>
+            <br><br>
+          </div>
+
+          <div class="col-sm-6">
+            <!-- Mindfulness Time -->
+            <%= form.label :mindfulness_time, "Mindfulness Time" %><br>
+            <div class="btn-group" role="group" aria-label="Mindfulness Time">
+              <% (0..4).each do |hours| %>
+                <input type="radio" class="btn-check" name="entry[mindfulness_time]" id="mindfulness-time-<%= hours %>" autocomplete="off" value="<%= hours %>">
+                <label class="btn <%= "btn-outline-success" if hours == 4 %><%= "btn-outline-warning" if hours == 2 || hours == 3 %><%= "btn-outline-danger" if hours <= 1 %>" for="mindfulness-time-<%= hours %>"><%= hours %></label>
+              <% end %>
+            </div>
+            <br><br>
+          </div>
+        </div>
+
+        <%= form.label :exercise_intensity, "Exercise Intensity" %><br>
+        <div class="btn-group" role="group" aria-label="Exercise Intensity">
+          <% (0..6).each do |intensity| %>
+            <input type="radio" class="btn-check" name="entry[exercise_intensity]" id="exercise-intensity-<%= intensity %>" autocomplete="off" value="<%= intensity %>">
+            <label class="btn <%= "btn-outline-success" if intensity >= 5 %><%= "btn-outline-warning" if intensity == 3 || intensity == 4 %><%= "btn-outline-danger" if intensity <= 2 %>" for="exercise-intensity-<%= intensity %>"><%= intensity %></label>
+          <% end %>
+        </div>
+        <br><br>
+          
+        <%= form.label :notable_dreams %>
+        <%= form.text_area :notable_dreams, size: "70x5", class: "form-control" %>
+        
+        <br>
+        
+        <%= form.label :positive_affirmations %>
+        <%= form.text_area :positive_affirmations, size: "70x5", class: "form-control" %>
+<br>
+        <div class="form-group mt-3">
+  <%= form.submit class: "form-control" %>
+      <% end %>
     </div>
-    <div class="form-group">
-      <%= form.submit class:"form-control"%>
-    </div>
-  <% end %>
-</div>
-</div>
+  </div>
+</section>

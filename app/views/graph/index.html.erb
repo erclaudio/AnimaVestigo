@@ -1,0 +1,23 @@
+<!-- app/views/graph/index.html.erb -->
+<h1 style="text-align: center">Your Progression</h1>
+<div class="container mt-4" style="background-color: white; padding: 20px; border-radius: 8px;">
+  <h2 class="text-center">Score Over Time</h2>
+  <%= line_chart @scores.map { |created_at, score| [created_at.strftime('%Y-%m-%d %H:%M:%S'), score] }, 
+    xtitle: "Date and Time", 
+    ytitle: "Score", 
+    height: "500px", 
+    colors: ["#4bc0c0"], 
+    library: {
+      backgroundColor: "#000000",
+      x: { 
+          type: 'time',
+          time: {
+            unit: 'day',  # Display only the day
+            tooltipFormat: 'll',  # Format for tooltip (e.g., "Sep 4, 2024")
+            displayFormats: {
+              day: 'MMM d'  # Format for x-axis labels (e.g., "Sep 4")
+            }
+          }
+    } }
+  %>
+</div>
